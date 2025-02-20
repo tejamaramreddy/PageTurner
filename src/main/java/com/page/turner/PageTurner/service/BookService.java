@@ -2,6 +2,8 @@ package com.page.turner.PageTurner.service;
 
 import com.page.turner.PageTurner.entity.Book;
 import com.page.turner.PageTurner.repository.BookRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +14,8 @@ import java.util.Optional;
 
 @Service
 public class BookService {
+
+    public static  final Logger logger = LoggerFactory.getLogger(BookService.class);
 
     @Autowired
     private BookRepository bookRepository;
@@ -43,5 +47,13 @@ public class BookService {
 
     public List<Book> getBookByAuthor(String author) {
         return bookRepository.findByAuthor(author);
+    }
+
+    public List<Book> findBookByLikeTitle(String title) {
+        try {
+            return bookRepository.findByTitleContainingIgnoreCase(title);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

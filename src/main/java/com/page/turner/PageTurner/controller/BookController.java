@@ -105,5 +105,19 @@ public class BookController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<Book>>> searchBooksByTitle(@RequestParam String searchTerm) {
+        try {
+            List<Book> books = bookService.findBookByLikeTitle(searchTerm.trim());
+            if (books.isEmpty()) {
+                ApiResponse<List<Book>> response = new ApiResponse<>("Success", "No Books which match " + searchTerm, books, HttpStatus.NO_CONTENT);
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+            }
+            ApiResponse<List<Book>> response = new ApiResponse<>("Success", "Books which match " + searchTerm, books, HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
