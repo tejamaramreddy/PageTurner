@@ -18,7 +18,10 @@ target/
 *.iws
 *.iml
 *.ipr
+<<<<<<< HEAD
 .DS_Store
+=======
+>>>>>>> d4c89f8 (Initial commit of PageTurner)
 
 ### NetBeans ###
 /nbproject/private/
@@ -29,3 +32,9 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+<<<<<<< HEAD
+=======
+
+### VS Code ###
+.vscode/
+>>>>>>> d4c89f8 (Initial commit of PageTurner)
